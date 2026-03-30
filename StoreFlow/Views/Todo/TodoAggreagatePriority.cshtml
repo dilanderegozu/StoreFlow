@@ -1,0 +1,239 @@
+﻿@{
+    ViewData["Title"] = "Todo Aggregate Priority";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<style>
+    .tap-page {
+        padding: 2rem;
+    }
+
+    .tap-header {
+        margin-bottom: 2rem;
+    }
+
+    .tap-title {
+        font-size: 22px;
+        font-weight: 500;
+        color: #1a1a1a;
+    }
+
+    .tap-subtitle {
+        font-size: 14px;
+        color: #888;
+        margin-top: 4px;
+    }
+
+    .tap-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .tap-stat {
+        background: #f7f7f5;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .tap-stat-label {
+        font-size: 12px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+
+    .tap-stat-value {
+        font-size: 24px;
+        font-weight: 500;
+        color: #1a1a1a;
+    }
+
+        .tap-stat-value.primary-color {
+            color: #185FA5;
+        }
+
+    .tap-card {
+        background: #fff;
+        border: 0.5px solid #e5e5e5;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .tap-card-head {
+        padding: 1rem 1.25rem;
+        border-bottom: 0.5px solid #e5e5e5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .tap-card-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #1a1a1a;
+    }
+
+    .tap-aggregate-box {
+        margin: 0;
+        padding: 1rem 1.25rem;
+        background: #f0f6fd;
+        border-bottom: 0.5px solid #e5e5e5;
+    }
+
+    .tap-aggregate-label {
+        font-size: 12px;
+        color: #185FA5;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+
+    .tap-aggregate-text {
+        font-size: 14px;
+        color: #1a1a1a;
+        line-height: 1.6;
+    }
+
+    .tap-empty {
+        text-align: center;
+        padding: 3rem;
+        color: #aaa;
+        font-size: 14px;
+    }
+
+    .tap-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tap-list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 1.25rem;
+        border-bottom: 0.5px solid #f0f0f0;
+    }
+
+        .tap-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .tap-list-item:hover {
+            background: #fafafa;
+        }
+
+    .tap-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #E6F1FB;
+        color: #185FA5;
+        flex-shrink: 0;
+    }
+
+    .tap-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #185FA5;
+    }
+
+    .tap-item-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #1a1a1a;
+    }
+
+    .tap-item-desc {
+        font-size: 12px;
+        color: #888;
+        margin-top: 3px;
+        line-height: 1.5;
+    }
+
+    .tap-index {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f0f6fd;
+        color: #185FA5;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+</style>
+
+<div class="tap-page">
+    <div class="tap-header">
+        <div class="tap-title">Todo Aggregate Priority</div>
+        <div class="tap-subtitle">Birincil öncelikli görevlerin toplu görünümü</div>
+    </div>
+
+    <div class="tap-stats">
+        <div class="tap-stat">
+            <div class="tap-stat-label">Toplam Görev</div>
+            <div class="tap-stat-value">@ViewBag.TotalCount</div>
+        </div>
+        <div class="tap-stat">
+            <div class="tap-stat-label">Birincil Öncelik</div>
+            <div class="tap-stat-value primary-color">@ViewBag.CriticalCount</div>
+        </div>
+        <div class="tap-stat">
+            <div class="tap-stat-label">Diğer</div>
+            <div class="tap-stat-value">@(ViewBag.TotalCount - ViewBag.CriticalCount)</div>
+        </div>
+    </div>
+
+    <div class="tap-card">
+        <div class="tap-card-head">
+            <span class="tap-card-title">Birincil Öncelikli Görevler</span>
+            <span class="tap-badge">
+                <span class="tap-badge-dot"></span>
+                Birincil
+            </span>
+        </div>
+
+        <div class="tap-aggregate-box">
+            <div class="tap-aggregate-label">Aggregate Sonucu</div>
+            <div class="tap-aggregate-text">@ViewBag.Results</div>
+        </div>
+
+        @if (ViewBag.Results == "Birincil öncelikli görev bulunamadı.")
+        {
+            <div class="tap-empty">Birincil öncelikli görev bulunamadı.</div>
+        }
+        else
+        {
+            <ul class="tap-list">
+                @{
+                    var descriptions = ((string)ViewBag.Results).Split(", ");
+                    int i = 1;
+                }
+                @foreach (var desc in descriptions)
+                {
+                    <li class="tap-list-item">
+                        <div class="tap-index">@i</div>
+                        <div>
+                            <div class="tap-item-title">Görev #@i</div>
+                            <div class="tap-item-desc">@desc</div>
+                        </div>
+                    </li>
+                    i++;
+                }
+            </ul>
+        }
+    </div>
+</div>

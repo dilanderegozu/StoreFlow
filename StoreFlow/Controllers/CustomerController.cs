@@ -30,11 +30,11 @@ namespace StoreFlow.Controllers
             var exist = _context.Customers.Any(x => x.CustomerCity == city);
             if (exist)
             {
-                ViewBag.message = $"{city} şehrinde en az 1 tane müşteri var";
+                ViewBag.message = $"{city} Şehrinde en az 1 tane müşteri var";
             }
             else
             {
-                ViewBag.message = $"{city} şehrinde hiç müşteri yok";
+                ViewBag.message = $"{city} Şehrinde hiç müşteri yok";
             }
 
             return View();
@@ -86,24 +86,25 @@ namespace StoreFlow.Controllers
             return View(groupedCustomers);
         }
 
-        //public IActionResult CustomersByCityCount()
-        //{
-        //    var query =
-        //        from c in _context.Customers
-        //        group c by c.CustomerCity into cityGroup
-        //        select new CustomerCityGroup
-        //        {
-        //            City = cityGroup.Key,
-        //            CustomerCount = cityGroup.Count()
-        //        };
-        //    var model = query.ToList();
-        //    return View(model);
-        //}
+        public IActionResult CustomersByCityCount()
+        {
+            var query =
+                from c in _context.Customers
+                group c by c.CustomerCity into cityGroup
+                select new CustomerCityGroup
+                {
+                    City = cityGroup.Key,
+                    CustomerCount = cityGroup.Count()
+                };
+            var model = query.ToList();
+            return View(model);
+        }
 
         public IActionResult CustomerCityList()
         {
             var values = _context.Customers.Select(x => x.CustomerCity).Distinct().ToList();
             return View(values);
+//distinct tekrarsız getiriyor 
         }
 
         public IActionResult ParallelCustomers()

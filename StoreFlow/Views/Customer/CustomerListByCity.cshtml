@@ -1,0 +1,50 @@
+﻿@model List<IGrouping<string,Customer>>
+
+@{
+    ViewData["Title"] = "CustomerListByCity";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">
+        Şehre Göre Müşteri Listesi
+    </h2>
+
+    <div class="grid gap-6">
+        @foreach (var group in Model)
+        {
+            <div class="bg-white shadow-md rounded-2xl p-5 border border-gray-100">
+
+                <!-- Şehir Başlığı -->
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-xl font-semibold text-indigo-600">
+                        @group.Key
+                    </h4>
+
+                    <span class="bg-indigo-100 text-indigo-600 text-sm px-3 py-1 rounded-full">
+                        @group.Count() müşteri
+                    </span>
+                </div>
+
+                <!-- Müşteri Listesi -->
+                <ul class="space-y-2">
+                    @foreach (var customer in group)
+                    {
+                        <li class="flex items-center justify-between bg-gray-50 px-4 py-2 rounded-lg hover:bg-indigo-50 transition">
+
+                            <span class="text-gray-700 font-medium">
+                                @customer.CustomerName @customer.CustomerSurname
+                            </span>
+
+                            
+
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        }
+    </div>
+
+</div>

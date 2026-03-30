@@ -23,8 +23,8 @@ namespace StoreFlow.ViewComponents.StatisticsViewComponents
 
 
             ViewBag.totalSumProductStock = _context.Products.Sum(x => x.ProductStock);
-            ViewBag.averageProductStock = _context.Products.Average(x => x.ProductStock);
-            ViewBag.averageProductPrice = _context.Products.Average(x => x.ProductPrice);
+            ViewBag.averageProductStock = _context.Products.Average(x => x.ProductStock).ToString("0.00"); ;
+            ViewBag.averageProductPrice = _context.Products.Average(x => x.ProductPrice).ToString("0.00"); ;
 
 
             ViewBag.biggerPriceThen1000ProductCount = _context.Products.Where(x => x.ProductPrice > 1000).Count();
