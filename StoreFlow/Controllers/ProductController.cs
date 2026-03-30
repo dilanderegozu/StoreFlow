@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using StoreFlow.Context;
 using StoreFlow.Entities;
 using StoreFlow.Models;
@@ -121,22 +122,24 @@ namespace StoreFlow.Controllers
             ViewBag.v2 = lastProduct.ProductName;
             ViewBag.v = value;
             return View();
+            //LongCount daha büyük veriler için 
+            //önce orderby last koleksiyondaki son eleman 
         }
 
-        //public IActionResult ProductListWithCategory()
-        //{
-        //    var result = from c in _context.Categories
-        //                 join p in _context.Products
-        //                 on
-        //                 c.CategoryId equals p.CategoryId
-        //                 select new ProductWithCategoryViewModel
-        //                 {
-        //                     ProductName = p.ProductName,
-        //                     ProductStock = p.ProductStock,
-        //                     CategoryName = c.CategoryName
-        //                 };
+        public IActionResult ProductListWithCategory()
+        {
+            var result = from c in _context.Categories
+                         join p in _context.Products
+                         on
+                         c.CategoryId equals p.CategoryId
+                         select new ProductWithCategoryViewModel
+                         {
+                             ProductName = p.ProductName,
+                             ProductStock = p.ProductStock,
+                             CategoryName = c.CategoryName
+                         };
 
-        //    return View(result.ToList());
-        //}
+            return View(result.ToList());
+        }
     }
 }

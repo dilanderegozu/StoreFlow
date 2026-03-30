@@ -2,6 +2,8 @@
 using StoreFlow.Context;
 using StoreFlow.Entities;
 using StoreFlow.Models;
+using System.Runtime.ConstrainedExecution;
+using System.Xml.Linq;
 
 namespace StoreFlow.Controllers
 {
@@ -110,6 +112,7 @@ namespace StoreFlow.Controllers
         public IActionResult ParallelCustomers()
         {
             var customers = _context.Customers.ToList();
+            //önce veritabanından çek sonrasında asParallel kullan . ASpARALLEL aynı anda birden fazla çekirdek işleyebilir.
             var result = customers
                 .AsParallel()
                 .Where(c => c.CustomerCity.StartsWith("A", StringComparison.OrdinalIgnoreCase))
@@ -124,7 +127,7 @@ namespace StoreFlow.Controllers
                 .Select(c => c.CustomerCity)
                 .ToList();
             var result = allCustomers.ExceptBy(customersListInIstanbul, c => c.CustomerCity).ToList();
-
+            //Except metodu genel fark alma işlemi yaparken, ExceptBy belirli bir özelliğe göre karşılaştırma yaparak fark alma işlemi gerçekleştirir.
             return View(result);
         }
 
@@ -138,6 +141,7 @@ namespace StoreFlow.Controllers
                 CustomerCity = "Ankara"
             }).ToList();
             return View(customers);
+            //"Eğer liste boşsa, yerine verdiğim değeri koy"
         }
 
         public IActionResult CustomerIntersectByCity()
@@ -147,6 +151,7 @@ namespace StoreFlow.Controllers
 
             var intersectValues = cityValues1.Intersect(cityValues2).ToList();
             return View(intersectValues);
+            //"İki listede ortak olan elemanları getir"
         }
 
         public IActionResult CustomerCastExample()
@@ -167,6 +172,8 @@ namespace StoreFlow.Controllers
                     c.CustomerSurname,
                     c.CustomerCity
                 })
+//                Müşterileri al
+//Her birine sıra numarası ekle
                 .ToList();
             return View(customers);
         }

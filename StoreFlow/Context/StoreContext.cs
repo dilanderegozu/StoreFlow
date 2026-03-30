@@ -17,5 +17,6 @@ namespace StoreFlow.Context
         public DbSet <Activity> Activities { get; set; }
 
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }
