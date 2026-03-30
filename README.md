@@ -144,17 +144,6 @@ var result = context.Customers
 
 ---
 
-## 🗂️ Proje Yapısı
-
-```
-StoreFlow/
-│
-├── Models/             # Entity sınıfları (Product, Category, Order, Customer...)
-├── Data/               # DbContext ve seed verileri
-├── Queries/            # Her sorgu senaryosuna ait örnekler
-└── Program.cs          # Uygulama giriş noktası
-```
-
 ---
 
 ## ⚙️ Kurulum & Çalıştırma
