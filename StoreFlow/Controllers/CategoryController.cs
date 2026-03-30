@@ -63,7 +63,7 @@ namespace StoreFlow.Controllers
 
             var categoryValue2 = _context.Categories.SingleOrDefault(x => x.CategoryName == "Bilgisayar");
             ViewBag.v2 = categoryValue2.CategoryStatus + "-" + categoryValue2.CategoryId.ToString();
-            //SingleOrDefault koleksiyonda sadece 1 tane eleman varsa getiri yoksa null döner birden fazla eleman varsa hata fırlatır
+            //SingleOrDefault koleksiyonda sadece 1 tane eleman varsa getirir yoksa null döner birden fazla eleman varsa hata fırlatır
             var values = _context.Categories.OrderBy(x => x.CategoryId).ToList();
             values.Reverse();
             return View(values);

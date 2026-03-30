@@ -2,8 +2,8 @@
 
 @using Newtonsoft.Json
 @{
-    var statusLabels = Model.Select(x => x.Status).ToList();
-    var statusCounts = Model.Select(x => x.Count).ToList();
+    var statusLabels = Model?.Select(x => x.Status).ToList();
+    var statusCounts = Model?.Select(x => x.Count).ToList();
 }
 
 <div class="col-md-6 grid-margin stretch-card">

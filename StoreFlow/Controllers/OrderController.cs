@@ -139,18 +139,18 @@ namespace StoreFlow.Controllers
             return RedirectToAction("OrderList");
         }
 
-        //public IActionResult OrderListWithCustomerGroup()
-        //{
-        //    var result = from customer in _context.Customers
-        //                 join order in _context.Orders
-        //                 on customer.CustomerId equals order.CustomerId
-        //                 into orderGroup
-        //                 select new CustomerOrderViewModel
-        //                 {
-        //                     CustomerName = customer.CustomerName + " " + customer.CustomerSurname,
-        //                     Orders = orderGroup.ToList()
-        //                 };
-        //    return View(result.ToList());
-        //}
+        public IActionResult OrderListWithCustomerGroup()
+        {
+            var result = from customer in _context.Customers
+                         join order in _context.Orders
+                         on customer.CustomerId equals order.CustomerId
+                         into orderGroup
+                         select new CustomerOrderViewModel
+                         {
+                             CustomerName = customer.CustomerName + " " + customer.CustomerSurname,
+                             Orders = orderGroup.ToList()
+                         };
+            return View(result.ToList());
+        }
     }
 }

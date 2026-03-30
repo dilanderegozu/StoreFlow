@@ -17,7 +17,7 @@ namespace StoreFlow.Controllers
         public IActionResult CustomerListOrderByCustomerName()
         {
             var values = _context.Customers.OrderBy(x => x.CustomerName)
-    .ThenBy(x => x.CustomerSurname).ToList();
+            .ThenBy(x => x.CustomerSurname).ToList();
             return View(values);
         }
 
@@ -106,7 +106,7 @@ namespace StoreFlow.Controllers
         {
             var values = _context.Customers.Select(x => x.CustomerCity).Distinct().ToList();
             return View(values);
-//distinct tekrarsız getiriyor 
+            //distinct tekrarsız getiriyor 
         }
 
         public IActionResult ParallelCustomers()
@@ -172,8 +172,8 @@ namespace StoreFlow.Controllers
                     c.CustomerSurname,
                     c.CustomerCity
                 })
-//                Müşterileri al
-//Her birine sıra numarası ekle
+            //Müşterileri al
+            //Her birine sıra numarası ekle
                 .ToList();
             return View(customers);
         }
