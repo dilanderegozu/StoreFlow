@@ -36,7 +36,7 @@
                                     <td>@item.Customer.CustomerName @item.Customer.CustomerSurname</td>
                                     <td>@item.OrderCount</td>
                                     <td>@item.UnitPrice TL</td>
-                                    <td>((item.OrderCount * item.UnitPrice).ToString("0.00")) TL</td>
+                                    <td>@((item.OrderCount * item.UnitPrice).ToString("0.00")) TL</td>
                                     <td>@item.Status</td>
                                     <td><a href="/Order/DeleteOrder/@item.OrderId" class="btn btn-outline-danger">Sil</a></td>
                                     <td><a href="/Order/UpdateOrder/@item.OrderId" class="btn btn-outline-success">Güncelle</a></td>
