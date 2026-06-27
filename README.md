@@ -13,7 +13,7 @@
 
 **StoreFlow**, Entity Framework Core'un sunduğu LINQ yeteneklerini gerçekçi bir mağaza senaryosu üzerinden keşfetmek amacıyla geliştirilmiş bir çalışma projesidir.
 
-Bu projede odak noktası yalnızca "nasıl yazılır?" değil, **"hangi durumda hangi sorgu kullanılır?"** sorusuna yanıt bulmaktır. Temel CRUD işlemlerinin ötesine geçilerek; veri filtreleme, gruplama, sayfalama ve ilişki yönetimi gibi ileri seviye konular ele alınmıştır.
+Bu projede odak noktası yalnızca "nasıl yazılır?" değil, **"hangi durumda hangi sorgu kullanılır?"** sorusuna yanıt bulmaktır. Temel CRUD işlemlerinin ötesine geçilerek veri filtreleme, gruplama, sayfalama ve ilişki yönetimi gibi ileri seviye konular ele alınmıştır.
 
 ---
 
